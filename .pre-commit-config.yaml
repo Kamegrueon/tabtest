@@ -3,7 +3,7 @@ repos:
     rev: v0.12.0
     hooks:
       - id: ruff
-        args: ["check", "--diff"]
+        args: ["check", "--diff", "--fix"]
       - id: ruff-format
         args: ["--diff"]
 

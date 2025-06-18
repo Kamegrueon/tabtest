@@ -18,18 +18,19 @@ dev = [
 ]
 
 [tool.ruff]
-extend-ignore = []
 fix = true
 line-length = 100
-select = ["ALL"]
-
 target-version = "py312"
-
 exclude = [
   "tests/assets",
   ".venv",
   "__pycache__",
 ]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "D"]
+ignore = ["D203", "D212"]
+
 
 [tool.mypy]
 exclude = [

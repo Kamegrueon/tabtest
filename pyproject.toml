@@ -1,7 +1,48 @@
 [project]
-name = "tabtest"
-version = "0.1.0"
+dependencies = [
+  "lxml>=5.4.0",
+  "pytest>=8.4.1",
+  "tableaudocumentapi>=0.11",
+]
 description = "Add your description here"
+name = "tabtest"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+version = "0.1.0"
+
+[dependency-groups]
+dev = [
+  "mypy>=1.16.1",
+  "pre-commit>=4.2.0",
+  "ruff>=0.12.0",
+]
+
+[tool.ruff]
+extend-ignore = []
+fix = true
+line-length = 100
+select = ["ALL"]
+
+target-version = "py312"
+
+exclude = [
+  "tests/assets",
+  ".venv",
+  "__pycache__",
+]
+
+[tool.mypy]
+exclude = [
+  "tests/*",
+  "examples/*",
+]
+ignore_missing_imports = true
+python_version = "3.12.5"
+strict = true
+
+[tool.pytest.ini_options]
+addopts = "-ra -q" 
+minversion = "6.0" # Minimum pytest version required
+testpaths = [
+  "tests",
+]

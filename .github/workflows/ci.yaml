@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: ["main"]
+
+jobs:
+  check:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -e .  # インストール可能なプロジェクト構成前提
+          pip install ruff mypy pytest
+
+      - name: Run format check (ruff diff)
+        run: |
+          ruff format --check --diff .
+
+      - name: Run linter (ruff check)
+        run: |
+          ruff check .
+
+      - name: Run type check (mypy)
+        run: |
+          mypy .
+
+      - name: Run tests (pytest)
+        run: |
+          pytest

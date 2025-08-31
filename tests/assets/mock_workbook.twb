@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<workbook version="2023.1" author="Test User" created="2024-01-01T00:00:00Z" modified="2024-01-01T00:00:00Z">
+  <repository-location id="MockWorkbook" />
+  
+  <!-- データソース -->
+  <datasource name="test_datasource" caption="Test Datasource">
+    <connection class="sqlproxy">
+      <relation name="test_table" table="[test_table]" />
+    </connection>
+    
+    <!-- フィールド -->
+    <column datatype="string" name="test_field" caption="Test Field" />
+    <column datatype="integer" name="test_number" caption="Test Number" />
+    
+    <!-- 計算フィールド -->
+    <column datatype="string" name="Calculation_123" caption="Test Calculation" formula="[test_field] + 'test'" />
+    
+    <!-- セット -->
+    <column datatype="string" name="test_set" caption="Test Set" role="measure" />
+    
+    <!-- データソースフィルタ -->
+    <groupfilter expression="[test_field] = True" function="filter" />
+  </datasource>
+  
+  <!-- パラメータ -->
+  <column datatype="string" name="test_param" caption="Test Parameter" param-domain-type="discrete" />
+  
+  <!-- ワークシート -->
+  <worksheet name="TestSheet" datasource="test_datasource">
+    <table>
+      <view>
+        <aggregation value="false" />
+        <marks>
+          <mark type="Circle" />
+        </marks>
+        <rows>
+          <row name="[test_field]" />
+        </rows>
+        <columns>
+          <column name="[test_number]" />
+        </columns>
+      </view>
+    </table>
+    <filters>
+      <filter name="[test_field]" class="categorical" />
+    </filters>
+  </worksheet>
+  
+  <!-- ダッシュボード -->
+  <dashboard name="TestDashboard">
+    <size maxwidth="1000" maxheight="800" />
+    <title>
+      <style>
+        <format attr="font-size" value="12" />
+      </style>
+      <run>Test Dashboard</run>
+    </title>
+    <zones>
+      <zone name="TestSheet" x="0" y="0" w="1000" h="800">
+        <worksheet name="TestSheet" />
+      </zone>
+    </zones>
+  </dashboard>
+</workbook>

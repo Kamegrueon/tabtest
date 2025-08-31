@@ -4,5 +4,6 @@
   "editor.defaultFormatter": "charliermarsh.ruff",
   "editor.formatOnSave": true,
   "files.eol": "\n",
-  "files.encoding": "utf8"
+  "files.encoding": "utf8",
+  "cSpell.words": ["groupfilter", "tabtest", "twbx"]
 }

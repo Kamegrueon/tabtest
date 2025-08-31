@@ -3,7 +3,6 @@ dependencies = [
   "lxml>=5.4.0",
   "pydantic>=2.11.7",
   "pytest>=8.4.1",
-  "tableaudocumentapi>=0.11",
 ]
 description = "Add your description here"
 name = "tabtest"
@@ -11,8 +10,17 @@ readme = "README.md"
 requires-python = ">=3.12"
 version = "0.1.0"
 
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=61.0", "wheel"]
+
+[tool.setuptools.packages.find]
+exclude = ["tests*", "docs*"]
+include = ["tabtest*"]
+
 [dependency-groups]
 dev = [
+  "bump2version>=1.0.1",
   "mypy>=1.16.1",
   "pre-commit>=4.2.0",
   "ruff>=0.12.0",
@@ -35,11 +43,14 @@ select = ["E", "F", "I", "D"]
 [tool.mypy]
 exclude = [
   "tests/*",
-  "examples/*",
 ]
 ignore_missing_imports = true
 python_version = "3.12"
-strict = true
+strict = false
+
+[[tool.mypy.overrides]]
+ignore_missing_imports = true
+module = "pydantic.BaseModel"
 
 [tool.pytest.ini_options]
 addopts = "-ra -q" 

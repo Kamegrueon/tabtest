@@ -7,7 +7,7 @@ class XMLLoader:
     """XMLファイルの読み込みを担当するクラス."""
 
     @staticmethod
-    def load_xml(file_path: str | Path):
+    def load_xml(file_path: str | Path) -> ET.ElementTree:
         """
         .twbまたは.twbxファイルからXMLを読み込む.
 
@@ -23,13 +23,13 @@ class XMLLoader:
         """
         file_path = Path(file_path)
         if file_path.suffix == ".twb":
-            return ET.parse(str(file_path))
+            return ET.parse(str(file_path))  # type: ignore
         elif file_path.suffix == ".twbx":
             with zipfile.ZipFile(file_path, "r") as zip_ref:
                 for name in zip_ref.namelist():
                     if name.endswith(".twb"):
                         with zip_ref.open(name) as f:
-                            return ET.parse(f)
+                            return ET.parse(f)  # type: ignore
                 raise ValueError("No .twb file found in .twbx archive")
         else:
             raise ValueError("Unsupported file type. Only .twb and .twbx files are supported.")
